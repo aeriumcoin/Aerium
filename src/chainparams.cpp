@@ -106,7 +106,7 @@ public:
 
         hashGenesisBlock = genesis.GetHash();
           assert(hashGenesisBlock == uint256("0x000002436db576ce4490d4ca7200eb65831c6d307a6dbfce866a9b791ff9f124"));
-          assert(genesis.hashMerkleRoot == uint256("2dc88c3f17724ce0707d6d138298eec37d51ebad8e8bd6639e2074d6e3236ca6"));
+          assert(genesis.hashMerkleRoot == uint256("0x2dc88c3f17724ce0707d6d138298eec37d51ebad8e8bd6639e2074d6e3236ca6"));
 
         // MineGenesis(genesis);
 
