@@ -1251,7 +1251,7 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast/*, const CBlo
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
     // Smoothly Transition: GetNextTargetRequired_Initial_POW -> DGW -> GetNextTargetRequired_POS
-    if (pindexLast->nHeight < 25)
+    if (pindexLast->nHeight < 30)
         return GetNextTargetRequired_PoS(pindexLast, fProofOfStake);
     else if (pindexLast->nHeight < 10500)
         return DarkGravityWave3(pindexLast);
