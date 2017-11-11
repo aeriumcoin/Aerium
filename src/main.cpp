@@ -1251,7 +1251,7 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast/*, const CBlo
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
     // Smoothly Transition: GetNextTargetRequired_Initial_POW -> DGW -> GetNextTargetRequired_POS
-    if (pindexLast->nHeight < 30)
+    if (pindexLast->nHeight < 25)
         return GetNextTargetRequired_PoS(pindexLast, fProofOfStake);
     else if (pindexLast->nHeight < 10500)
         return DarkGravityWave3(pindexLast);
@@ -1265,8 +1265,8 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     bnTarget.SetCompact(nBits);
 
     // Check range
-    if (bnTarget <= 0 || bnTarget > Params().ProofOfWorkLimit())
-        return error("CheckProofOfWork() : nBits below minimum work");
+    // if (bnTarget <= 0 || bnTarget > Params().ProofOfWorkLimit())
+       // return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
     if (hash > bnTarget.getuint256())
