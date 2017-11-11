@@ -102,7 +102,7 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = 1510410863;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 861747;
+        genesis.nNonce   = 1484662;
 
         hashGenesisBlock = genesis.GetHash();
           assert(hashGenesisBlock == uint256("0x000002436db576ce4490d4ca7200eb65831c6d307a6dbfce866a9b791ff9f124"));
