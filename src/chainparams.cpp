@@ -105,12 +105,12 @@ public:
         genesis.nNonce   = 861747;
 
         hashGenesisBlock = genesis.GetHash();
-         // assert(hashGenesisBlock == uint256("0x00000c48a4cbd57d085c2af9f3c1d0aed132b32186cabda7d5490cec6184fdc7"));
-         // assert(genesis.hashMerkleRoot == uint256("0x46b5ba33cb59670e80b5bdd52f9a4ebd16ab5ed96d34015e31c4011a6c071825"));
+          assert(hashGenesisBlock == uint256("0x000002436db576ce4490d4ca7200eb65831c6d307a6dbfce866a9b791ff9f124"));
+          assert(genesis.hashMerkleRoot == uint256("2dc88c3f17724ce0707d6d138298eec37d51ebad8e8bd6639e2074d6e3236ca6"));
 
-        MineGenesis(genesis);
+        // MineGenesis(genesis);
 
-        vSeeds.push_back(CDNSSeedData("", "")); // Google cloud node
+        vSeeds.push_back(CDNSSeedData("18.216.79.110", "18.216.79.110")); // Google cloud node
    
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 23);
