@@ -22,9 +22,6 @@ namespace Checkpoints
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
         (  0,     uint256("0x00000c48a4cbd57d085c2af9f3c1d0aed132b32186cabda7d5490cec6184fdc7") ) // here we go
-		(  5,     uint256("0x57eed9b15e0243156fd4b61fbf8ecbb10304ac1a1a3732e1c022eaa6c42e929e") ) 
-		( 10,     uint256("0x1b7b3f663f64609033045e004504485a1ec59cd166681586c17522bef8217c1b") ) 
-		( 35,     uint256("0x60c103553925882a9233fade9705287c8e3a861bf505824347addbe9cd671a9b") )
         ;
 
     // TestNet has no checkpoints
@@ -36,7 +33,7 @@ namespace Checkpoints
 
         MapCheckpoints::const_iterator i = checkpoints.find(nHeight);
         if (i == checkpoints.end()) return true;
-        return hash == i->second;
+        return NULL;
     }
 
     int GetTotalBlocksEstimate()
@@ -45,7 +42,7 @@ namespace Checkpoints
 
         if (checkpoints.empty())
             return 0;
-        return checkpoints.rbegin()->first;
+        return NULL;
     }
 
     CBlockIndex* GetLastCheckpoint(const std::map<uint256, CBlockIndex*>& mapBlockIndex)
@@ -69,7 +66,7 @@ namespace Checkpoints
         // Search backward for a block within max span and maturity window
         while (pindex->pprev && pindex->nHeight + nCheckpointSpan > pindexBest->nHeight)
             pindex = pindex->pprev;
-        return pindex;
+        return NULL;
     }
 
     // Check against synchronized checkpoint
@@ -78,8 +75,8 @@ namespace Checkpoints
         const CBlockIndex* pindexSync = AutoSelectSyncCheckpoint();
 
         if (nHeight <= pindexSync->nHeight)
-            return false;
-        return true;
+            return NULL;
+        return NULL;
     }
 	
 }

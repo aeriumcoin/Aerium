@@ -95,20 +95,20 @@ public:
         std::vector<CTxOut> vout;
         vout.resize(1);
         vout[0].SetEmpty();
-        CTransaction txNew(1, 1509627315, vin, vout, 0);
+        CTransaction txNew(1, 1510410863, vin, vout, 0);
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1509627315;
+        genesis.nTime    = 1510410863;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 861747;
+        genesis.nNonce   = 861750;
 
         hashGenesisBlock = genesis.GetHash();
-         assert(hashGenesisBlock == uint256("0x00000c48a4cbd57d085c2af9f3c1d0aed132b32186cabda7d5490cec6184fdc7"));
-         assert(genesis.hashMerkleRoot == uint256("0x46b5ba33cb59670e80b5bdd52f9a4ebd16ab5ed96d34015e31c4011a6c071825"));
+         // assert(hashGenesisBlock == uint256("0x00000c48a4cbd57d085c2af9f3c1d0aed132b32186cabda7d5490cec6184fdc7"));
+         // assert(genesis.hashMerkleRoot == uint256("0x46b5ba33cb59670e80b5bdd52f9a4ebd16ab5ed96d34015e31c4011a6c071825"));
 
-      // MineGenesis(genesis);
+       MineGenesis(genesis);
 
         vSeeds.push_back(CDNSSeedData("18.216.79.110", "18.216.79.110")); // Google cloud node
    
