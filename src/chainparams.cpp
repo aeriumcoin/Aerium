@@ -110,8 +110,8 @@ public:
 
         // MineGenesis(genesis);
 
-        vSeeds.push_back(CDNSSeedData("18.216.79.110", "18.216.79.110")); // Google cloud node
-   
+        vSeeds.push_back(CDNSSeedData("18.216.79.110", "18.216.79.110")); // AWS cloud node
+		vSeeds.push_back(CDNSSeedData("185.223.31.170", "185.223.31.170")); // 
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 83);
