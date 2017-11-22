@@ -1136,15 +1136,15 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 }
 
 int64_t nTargetTimespan()
-{
- if (pindexBest->nHeight <= 12000) {
-int timespanfix = (7 *24 * 60);
-return timespanfix;
-}
-else{
-int timespanfix = (7 *24 * 60 * 60); // timespan-fix from block 12000
-return timespanfix;
-}
+  {
+   if (pindexBest->nHeight <= 12000) {
+     int64_t timespanfix = (7 *24 * 60);
+     return timespanfix;
+  }
+   else{
+     int64_t timespanfix = (7 *24 * 60 * 60); // timespan-fix from block 12000
+   return timespanfix;
+  }
 }
 
 // ppcoin: find last block index up to pindex
