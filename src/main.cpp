@@ -42,6 +42,7 @@ set<pair<COutPoint, unsigned int> > setStakeSeen;
 CBigNum bnProofOfWorkLimit(~uint256(0) >> 4);
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 48);
+CBigNum bnProofOfStakeLimitFixed(~uint256(0) >> 40);
 
 int nStakeMinConfirmations = 40;
 unsigned int nStakeMinAge = 6 * 60 * 30; // 3 hour
@@ -988,7 +989,9 @@ void static PruneOrphanBlocks()
 
 static CBigNum GetProofOfStakeLimit(int nHeight)
 {
-    if (IsProtocolV2(nHeight))
+    if ( nHeight >= 14900 )
+        return bnProofOfStakeLimitFixed;
+    else if (IsProtocolV2(nHeight))
         return bnProofOfStakeLimitV2;
     else
         return bnProofOfStakeLimit;
@@ -1135,17 +1138,23 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
     return nSubsidy + nFees;
 }
 
-int64_t nTargetTimespan()
-  {
-   if (pindexBest->nHeight <= 12000) {
-     int64_t timespanfix = (7 *24 * 60);
-     return timespanfix;
-  }
-   else{
-     int64_t timespanfix = (7 *24 * 60 * 60); // timespan-fix from block 12000
-   return timespanfix;
-  }
+int64_t nTargetTimespan(int nHeight)
+{
+    if (pindexBest->nHeight <= 12000) {
+        int64_t timespanfix = (7 * 24 * 60);
+        return timespanfix;
+    }
+    else if (nHeight < 14900) {
+        int64_t timespanfix = (7 * 24 * 60 * 60); // timespan-fix from block 12000
+        return timespanfix;
+    }
+    else {
+        int64_t timespanfix = (60 * 60); // timespan-fix from block 14900
+        return timespanfix;
+    }
 }
+
+this will leave your last fix untouched
 
 // ppcoin: find last block index up to pindex
 const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
@@ -1184,7 +1193,7 @@ unsigned int GetNextTargetRequired_PoS(const CBlockIndex* pindexLast, bool fProo
     // ppcoin: retarget with exponential moving toward target spacing
     CBigNum bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
-    int64_t nInterval = nTargetTimespan() / nTargetSpacing;
+    int64_t nInterval = nTargetTimespan(pindexLast->nHeight) / nTargetSpacing;
     bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
     bnNew /= ((nInterval + 1) * nTargetSpacing);
 
