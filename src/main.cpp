@@ -1153,8 +1153,7 @@ int64_t nTargetTimespan(int nHeight)
         return timespanfix;
     }
 }
-
-this will leave your last fix untouched
+// this will leave your last fix untouched
 
 // ppcoin: find last block index up to pindex
 const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
