@@ -434,7 +434,12 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
         return fDebug? error("CheckProofOfStake() : read block failed") : false; // unable to read block of previous transaction
 
     // Min age requirement
-    if (IsProtocolV3(tx.nTime))
+	
+	
+	if (nBestHeight >= 45000 )
+		return nStakeMinConfirmationsFix;
+	
+    else if (IsProtocolV3(tx.nTime))
     {
         int nDepth;
         if (IsConfirmedInNPrevBlocks(txindex, pindexPrev, nStakeMinConfirmations - 1, nDepth))
