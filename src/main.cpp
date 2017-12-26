@@ -47,7 +47,7 @@ CBigNum bnProofOfStakeLimitFixed(~uint256(0) >> 40);
 int nStakeMinConfirmations = 40;
 unsigned int nStakeMinAge = 6 * 60 * 30; // 3 hour
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
-int nStakeMinConfirmationsFix = 1440; // 24 Hours
+int nStakeMinConfirmationsFix = 60; // 1 Hour
 
 int nCoinbaseMaturity = 15;
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -1060,21 +1060,75 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
       } 
 	else if(pindexBest->nHeight <= 45000) {
        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
-	}
-	else if (pindexBest->nHeight <= 47500) {
-		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 20;
-	}
-	else if (pindexBest->nHeight <= 50000) {
-		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
-	}
-	else if (pindexBest->nHeight <= 60000) {
-		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
-	}
-	else if (pindexBest->nHeight <= 100000) {
-		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/2;
-	}
+      } 
+	else if(pindexBest->nHeight <= 45750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 50000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+ 	else if(pindexBest->nHeight <= 53000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 20;
+      } 
+	else if(pindexBest->nHeight <= 55000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 55750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 60000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 60750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 65000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      }
+	else if(pindexBest->nHeight <= 65750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 70000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 70750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 75000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 76500) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 20;
+      } 
+	else if(pindexBest->nHeight <= 80000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 80750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 85000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 85750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      } 
+	else if(pindexBest->nHeight <= 90000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      } 
+	else if(pindexBest->nHeight <= 90750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      }
+	else if(pindexBest->nHeight <= 95000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1;
+      }
+	else if(pindexBest->nHeight <= 95750) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10;
+      }
+	else if(pindexBest->nHeight <= 100000) {
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 25;
+      }	
 	else if(pindexBest->nMoneySupply <= 500000000) {
-       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/10;
+       nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2;
       }	
 	else {
 		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 0;
@@ -3066,7 +3120,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
            badVersion = true;
         if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
            badVersion = true;
-        if (nBestHeight >= 50000 && pfrom->nVersion < 70005)
+        if (nBestHeight >= 60000 && pfrom->nVersion < 70006)
            badVersion = true;    	
         if (badVersion)
         {

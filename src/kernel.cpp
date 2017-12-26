@@ -436,7 +436,7 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
     // Min age requirement
 	
 	
-	if (nBestHeight >= 45000 )
+	if (nBestHeight >= 60000 )
 		return nStakeMinConfirmationsFix;
 	
     else if (IsProtocolV3(tx.nTime))

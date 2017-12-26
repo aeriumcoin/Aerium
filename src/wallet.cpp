@@ -1133,7 +1133,7 @@ void CWallet::AvailableCoinsForStaking(vector<COutput>& vCoins, unsigned int nSp
             if (nDepth < 1)
                 continue;
 			
-            if (nBestHeight >= 45000)
+            if (nBestHeight >= 60000)
             {
                 if (nDepth < nStakeMinConfirmationsFix)
                     continue;
