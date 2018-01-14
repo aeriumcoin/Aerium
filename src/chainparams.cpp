@@ -112,7 +112,21 @@ public:
 
         vSeeds.push_back(CDNSSeedData("18.216.79.110", "18.216.79.110")); // AWS cloud node
 		vSeeds.push_back(CDNSSeedData("185.223.31.170", "185.223.31.170")); // 
-
+        vSeeds.push_back(CDNSSeedData("45.76.103.65", "45.76.103.65")); // 
+		vSeeds.push_back(CDNSSeedData("45.63.48.241", "45.63.48.241")); // 
+		vSeeds.push_back(CDNSSeedData("185.223.30.120", "185.223.30.120")); // 
+		vSeeds.push_back(CDNSSeedData("128.77.65.71", "128.77.65.71")); // 
+		vSeeds.push_back(CDNSSeedData("104.238.181.13", "104.238.181.13")); // 
+		vSeeds.push_back(CDNSSeedData("108.61.181.58", "108.61.181.58")); // 
+		vSeeds.push_back(CDNSSeedData("45.77.141.139", "45.77.141.139")); // 
+		vSeeds.push_back(CDNSSeedData("45.76.82.217", "45.76.82.217")); // 
+		vSeeds.push_back(CDNSSeedData("45.76.84.32", "45.76.84.32")); // 
+		vSeeds.push_back(CDNSSeedData("45.76.52.41", "45.76.52.41")); // 
+		vSeeds.push_back(CDNSSeedData("45.63.93.21", "45.63.93.21")); // 
+		vSeeds.push_back(CDNSSeedData("173.233.72.98", "173.233.72.98")); // 
+		
+		
+		
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 83);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1, (23+128));
