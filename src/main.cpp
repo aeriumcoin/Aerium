@@ -992,7 +992,7 @@ void static PruneOrphanBlocks()
 
 static CBigNum GetProofOfStakeLimit(int nHeight)
 {
-	if ( nHeight >= 101300 )
+	if ( nHeight >= 101000 )
 		return bnProofOfStakeLimitFixed2;
     else if ( nHeight >= 14900 )
         return bnProofOfStakeLimitFixed;
@@ -1131,7 +1131,7 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 	else if(pindexBest->nHeight <= 100000) {
        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 25;
       }	
-	else if(pindexBest->nHeight <= 101300) {
+	else if(pindexBest->nHeight <= 101000) {
 		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 0;
 	}
 	else if(pindexBest->nMoneySupply <= 50000000000000000) {
@@ -1139,7 +1139,7 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2;
 		}
 			else if (pindexBext->nHeight <= 153200) {
-			nSubsidy = nCoinAge * ((COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2) - 0.0229166 * (pindexBest->nHeight - 110000);
+			nSubsidy = nCoinAge * ((COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2) - 0.0229166 * (pindexBest->nHeight - 110000));
 			}
 			else { 
 			int SuperBlocks = pindexBest->nHeight % 100;
@@ -3146,7 +3146,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
            badVersion = true;
         if (nBestHeight >= 60000 && pfrom->nVersion < 70006)
            badVersion = true;    	
-	   if (nBestHeight >= 101300 && pfrom->nVersion < 70008)
+	   if (nBestHeight >= 101000 && pfrom->nVersion < 70008)
            badVersion = true;    	
         if (badVersion)
         {
