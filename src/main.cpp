@@ -43,11 +43,13 @@ CBigNum bnProofOfWorkLimit(~uint256(0) >> 4);
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 48);
 CBigNum bnProofOfStakeLimitFixed(~uint256(0) >> 40);
+CBigNum bnProofOfStakeLimitFixed2(~uint256(0) >> 49);
 
 int nStakeMinConfirmations = 40;
 unsigned int nStakeMinAge = 6 * 60 * 30; // 3 hour
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
 int nStakeMinConfirmationsFix = 60; // 1 Hour
+int nStakeMinConfirmationsFix2 = 20; // 20 Minutes
 
 int nCoinbaseMaturity = 15;
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -990,7 +992,9 @@ void static PruneOrphanBlocks()
 
 static CBigNum GetProofOfStakeLimit(int nHeight)
 {
-    if ( nHeight >= 14900 )
+	if ( nHeight >= 101300 )
+		return bnProofOfStakeLimitFixed2;
+    else if ( nHeight >= 14900 )
         return bnProofOfStakeLimitFixed;
     else if (IsProtocolV2(nHeight))
         return bnProofOfStakeLimitV2;
@@ -1009,7 +1013,7 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 	else if(pindexBest->nHeight <= 10500) {
        nSubsidy = 30 * COIN;
     } else {
-        nSubsidy = 1 * COIN;
+        nSubsidy = 0 * COIN;
     }
 
     LogPrint("GetProofOfWorkReward() : create=%s", FormatMoney(nSubsidy).c_str(), nSubsidy);
@@ -1127,8 +1131,28 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 	else if(pindexBest->nHeight <= 100000) {
        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 25;
       }	
-	else if(pindexBest->nMoneySupply <= 500000000) {
+	else if(pindexBest->nHeight <= 101300) {
+		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 0;
+	}
+	else if(pindexBest->nMoneySupply <= 50000000000000000) {
+			if (pindexBest->nHeight <= 110000) {
        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2;
+		}
+			else if (pindexBext->nHeight <= 153200) {
+			nSubsidy = nCoinAge * ((COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2) - 0.0229166 * (pindexBest->nHeight - 110000);
+			}
+			else { 
+			int SuperBlocks = pindexBest->nHeight % 100;
+				if (SuperBlocks == 25 || 50 || 75) {
+			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/10;
+			}
+				else if (SuperBlocks == 0) {
+			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/5;
+			}
+				else {
+			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/25;
+			}
+		}
       }	
 	else {
 		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 0;
@@ -3122,10 +3146,11 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
            badVersion = true;
         if (nBestHeight >= 60000 && pfrom->nVersion < 70006)
            badVersion = true;    	
+           badVersion = true;    	
         if (badVersion)
         {
             // disconnect from peers older than this proto version
-            printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
+            LogPrintf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
             pfrom->fDisconnect = true;
             return false;
         }
