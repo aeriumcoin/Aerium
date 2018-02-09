@@ -1138,22 +1138,16 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 			if (pindexBest->nHeight <= 110000) {
        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2;
 		}
-			else if (pindexBest->nHeight <= 153200) {
-			nSubsidy = nCoinAge * ((COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2) - 0.0229166 * (pindexBest->nHeight - 110000));
+			else if (pindexBest->nHeight <= 111203) {
+			nSubsidy = nCoinAge * ((COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2) - 0.0229166 *(pindexBest->nHeight - 110000));
 			}
-			else { 
-			int SuperBlocks = pindexBest->nHeight % 100;
-				if (SuperBlocks == 25 || 50 || 75) {
-			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/10;
+			else if (pindexBest->nHeight <= 125000) { 
+			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/2;
 			}
-				else if (SuperBlocks == 0) {
-			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/5;
+			else {
+				nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/50;
 			}
-				else {
-			nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1/50;
-			}
-		}
-      }	
+		}	
 	else {
 		nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 0;
 	}
@@ -3146,7 +3140,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
            badVersion = true;
         if (nBestHeight >= 60000 && pfrom->nVersion < 70006)
            badVersion = true;    	
-	   if (nBestHeight >= 10100 && pfrom->nVersion < 70008)
+	   if (nBestHeight >= 10100 && pfrom->nVersion < 70010)
            badVersion = true;    	
         if (badVersion)
         {
